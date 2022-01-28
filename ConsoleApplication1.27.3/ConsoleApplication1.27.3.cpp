@@ -22,7 +22,7 @@ int main()
 	interim = stoi(strM) * 60 + stoi(strS);
 	time_t t = time(0);
 	time_t completion = t + (time_t)interim;
-	intermediate =(double) interim;//
+	intermediate =(double) interim;
 	do {
 		time_t  start = time(nullptr);
 		interval = difftime(completion, start);
