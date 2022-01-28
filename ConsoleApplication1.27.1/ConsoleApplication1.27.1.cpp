@@ -20,10 +20,11 @@ int main()
 	if (commandStr == "begin") {
 		cout << "\nВведите название задачи.";
 		cin >> titleStr;
-
+		time_t d = time(0);
 		do {
 			time_t t = time(0);
-			tm* local = localtime(&t);
+			//tm* local = localtime(&t);
+			countdown = difftime(t, d);
 
 		} while (commandStr == "begin");
 	}
