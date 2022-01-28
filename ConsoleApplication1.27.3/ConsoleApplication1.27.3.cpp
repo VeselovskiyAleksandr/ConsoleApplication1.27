@@ -22,8 +22,6 @@ int main()
 	interim = stoi(strM) * 60 + stoi(strS);
 	time_t t = time(0);
 	tm* local = localtime(&t);
-	time_t d = time(nullptr);
-	tm* loc = localtime(&d);	
 	time_t completion = t + (time_t)interim;
 	intermediate =(double) interim;//
 	do {

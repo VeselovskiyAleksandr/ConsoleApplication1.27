@@ -13,6 +13,20 @@ using namespace std;
 int main()
 {	
 	setlocale(LC_ALL, "Rus");
+	string commandStr, titleStr;
+	int countdown = 0, interim = 0, count=0;
+	cout << "\nДля начала отслеживания задачи введите: begin";
+	cin>> commandStr;
+	if (commandStr == "begin") {
+		cout << "\nВведите название задачи.";
+		cin >> titleStr;
+
+		do {
+			time_t t = time(0);
+			tm* local = localtime(&t);
+
+		} while (commandStr == "begin");
+	}
 
 	return 0;
 }
