@@ -29,16 +29,16 @@ int main()
 		if (intermediate != interval) {
 			cout << "\n";
 			if ((int)interval / 60 > 9) {
-				cout << (int)interval / 60 << ":";
+				cout << interval / 60 << ":";
 			}
 			else {
-				cout << "0" << (int)interval / 60 << ":";
+				cout << "0" << interval / 60 << ":";
 			}
-			if ((int)interval % 60 > 9) {
-				cout << (int)interval % 60;
+			if (interval % 60 > 9) {
+				cout << interval % 60;
 			}
 			else {
-				cout << "0" << (int)interval % 60;
+				cout << "0" << interval % 60;
 			}
 		}
 		if (completion == start) {
