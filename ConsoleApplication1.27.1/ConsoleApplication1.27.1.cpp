@@ -5,29 +5,59 @@
 #include <iostream>
 #include <ctime>
 #include <iomanip>
-#include <windows.h> 
+//#include <windows.h> 
 #include <locale.h>
 #include <string>
+#include <vector>
+
 using namespace std;
+
+struct tests {
+	string title;
+	string elapsTime;
+};
+tests test[20];
 
 int main()
 {	
 	setlocale(LC_ALL, "Rus");
-	string commandStr, titleStr;
-	int countdown = 0, interim = 0, count=0;
-	cout << "\nДля начала отслеживания задачи введите: begin";
+	string commandStr="", solutionTime="";
+	vector <tests> ;
+	int countdown = 0, interim = 0, count=0, tH=0, tM=0, tS=0;
+	cout << "\nДля начала отслеживания задачи введите: begin ";
 	cin>> commandStr;
-	if (commandStr == "begin") {
-		cout << "\nВведите название задачи.";
-		cin >> titleStr;
-		time_t d = time(0);
-		do {
-			time_t t = time(0);
-			//tm* local = localtime(&t);
-			countdown = difftime(t, d);
-
-		} while (commandStr == "begin");
-	}
+	do {
+		if (count >= 20) {
+			cout << "\n<Большее количество задач програма отслеживать не может.";
+			cout << "\nДля просмотра состояния введите status ";
+			cin >> commandStr;
+			if (commandStr != "status") {
+				return 0;
+			}
+		}
+		if (commandStr == "begin") {
+			cout << "\nВведите название задачи.";
+			cin >> test[count].title;
+			time_t d = time(0);
+			interim = countdown;
+			do {
+				cout << "\nДля окончания отслеживания введите: end, для начала отслеживания новой задачи введите : begin";
+				cout << "\nДля просмотра состояния введите status ";
+				cin >> commandStr;
+				if (commandStr == "end") {
+					time_t t = time(0);
+					countdown = (int)difftime(t, d);
+					tS=countdown % 60;
+					tM= countdown / 60;
+					tH= countdown / 3600;
+					solutionTime = string(tH);
+					test[count].elapsTime=string(tH)<<"ч "<<
+					break;
+				}
+			} while (commandStr == "begin");
+			cout << " " << countdown;
+		}
+	}while (commandStr != "end");
 
 	return 0;
 }

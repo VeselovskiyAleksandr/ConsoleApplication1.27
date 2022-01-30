@@ -25,7 +25,7 @@ int main()
 	intermediate = interim;
 	do {
 		time_t  start = time(nullptr);
-		interval = difftime(completion, start);
+		interval =(int) difftime(completion, start);
 		if (intermediate != interval) {
 			cout << "\n";
 			if ((int)interval / 60 > 9) {
