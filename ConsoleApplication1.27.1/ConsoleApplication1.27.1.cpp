@@ -22,7 +22,7 @@ int main()
 {	
 	setlocale(LC_ALL, "Rus");
 	string commandStr="", solutionTime="";
-	vector <tests> ;
+	vector <tests> testAll;
 	int countdown = 0, interim = 0, count=0, tH=0, tM=0, tS=0;
 	cout << "\nДля начала отслеживания задачи введите: begin ";
 	cin>> commandStr;
@@ -35,27 +35,45 @@ int main()
 				return 0;
 			}
 		}
-		if (commandStr == "begin") {
 			cout << "\nВведите название задачи.";
 			cin >> test[count].title;
+            commandStr == "";
 			time_t d = time(0);
 			interim = countdown;
-			do {
+			do {				
 				cout << "\nДля окончания отслеживания введите: end, для начала отслеживания новой задачи введите : begin";
 				cout << "\nДля просмотра состояния введите status ";
 				cin >> commandStr;
-				if (commandStr == "end") {
+				solutionTime = "";
 					time_t t = time(0);
 					countdown = (int)difftime(t, d);
 					tS=countdown % 60;
 					tM= countdown / 60;
 					tH= countdown / 3600;
-					solutionTime = string(tH);
-					test[count].elapsTime=string(tH)<<"ч "<<
+					solutionTime.append(to_string(tH));
+					solutionTime.append(" hour ");
+					solutionTime.append(to_string(tM));
+					solutionTime.append(" minutes ");
+					solutionTime.append(to_string(tS));
+					solutionTime.append(" seconds ");
+					test[count].elapsTime = solutionTime;
+					testAll.push_back(test[count]);
 					break;
-				}
 			} while (commandStr == "begin");
-			cout << " " << countdown;
+			if (commandStr == "end") {
+				break;
+			}
+			else if (commandStr == "begin") {
+				
+				count++;
+			}
+			
+			 if (commandStr == "status") {
+				for (int i = 0; i < testAll.size(); i++) {
+					cout << "\n" << testAll[i].title << "  " << testAll[i].elapsTime;
+				}
+				cout << "\nДля окончания отслеживания введите: end, для начала отслеживания новой задачи введите : begin";
+				cin >> commandStr;
 		}
 	}while (commandStr != "end");
 
