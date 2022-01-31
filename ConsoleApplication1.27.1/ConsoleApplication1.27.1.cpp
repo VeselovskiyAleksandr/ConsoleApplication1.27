@@ -5,7 +5,6 @@
 #include <iostream>
 #include <ctime>
 #include <iomanip>
-//#include <windows.h> 
 #include <locale.h>
 #include <string>
 #include <vector>
@@ -22,29 +21,28 @@ int main()
 {	
 	setlocale(LC_ALL, "Rus");
 	string commandStr="", solutionTime="";
-	vector <tests> testAll;
 	int countdown = 0, interim = 0, count=0, tH=0, tM=0, tS=0;
 	cout << "\nДля начала отслеживания задачи введите: begin ";
 	cin>> commandStr;
 	do {
-		cout << "\n " << count;
 		if (count >= 20) {
 			cout << "\n<Большее количество задач програма отслеживать не может.";
 			cout << "\nДля просмотра состояния введите status ";
 			cin >> commandStr;
 			if (commandStr == "status") {
-					for (int i = 0; i < testAll.size(); i++) {
-						cout << "\n" << testAll[i].title << "  " << testAll[i].elapsTime;
+					for (int i = 0; i < count;i++){
+						cout << "\n" << test[i].title << "  " << test[i].elapsTime;
 			}
 		};
 				return 0;
 		}
+            count++;
 			cout << "\nВведите название задачи.";
-			cin >> test[count].title;
+			cin >> test[count-1].title;			
             commandStr == "";
 			time_t d = time(0);
 			interim = countdown;
-			do {				
+			do {           
 				cout << "\nДля окончания отслеживания введите: end, для начала отслеживания новой задачи введите : begin";
 				cout << "\nДля просмотра состояния введите status ";
 				cin >> commandStr;
@@ -60,23 +58,17 @@ int main()
 					solutionTime.append(" minutes ");
 					solutionTime.append(to_string(tS));
 					solutionTime.append(" seconds ");
-					test[count].elapsTime = solutionTime;
-					testAll.push_back(test[count]);
+					test[count-1].elapsTime = solutionTime;
 					break;
 			} while (commandStr == "begin");
 			if (commandStr == "end") {
 				break;
 			}
-			else if (commandStr == "begin") {
-				
-				count++;
-			}
-			
 			 if (commandStr == "status") {
-				for (int i = 0; i < testAll.size(); i++) {
-					cout << "\n" << testAll[i].title << "  " << testAll[i].elapsTime;
+				for (int i = 0; i < count; i++) {
+					cout << "\n" << test[i].title << "  " << test[i].elapsTime;
 				}
-				cout << "\nДля окончания отслеживания введите: end, для начала отслеживания новой задачи введите : begin";
+				cout << "\nДля окончания отслеживания введите: end, для начала отслеживания новой задачи введите : begin ";
 				cin >> commandStr;
 		}
 	}while (commandStr != "end");
