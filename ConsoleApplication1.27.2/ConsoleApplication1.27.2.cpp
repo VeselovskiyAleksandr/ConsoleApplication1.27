@@ -17,14 +17,9 @@ struct birthday {
 };
 birthday friends[100];
 
-int main()
-{
-	setlocale(LC_ALL, "Rus");
-	vector<birthday> birthdays;
-	vector<string> fr;
-	int countFr = 0, nextM = 12, nextD = 0, next = 32, count=0;
-	string str = "", str1 = "", str2 = "", str3 = "", strY = "", strM = "", strD = "", birthdayBoy = "", nextBirthday = "";
-	ifstream file("C:\\Users\\Александр\\Documents\\text for program\\friendsBirthday.txt");
+int fileSize(int count) {
+ifstream file("C:\\Users\\Александр\\Documents\\text for program\\friendsBirthday.txt");
+string str = "";
 	if (file.is_open()) {
 		cout << "\nThe file is open.";
 	}
@@ -34,20 +29,22 @@ int main()
 	}
 	while (!file.eof()) {
 		file >> str;
-
 		if (str == ";") {
-			countFr++;
+			count++;
 		}
 		str = "";
 	}
-	file.close();
+	return count;
+}
+
+int writeFile(int countFr, birthday friends[100]) {
 	ofstream cfile("C:\\Users\\Александр\\Documents\\text for program\\friendsBirthday.txt", ios::app);
+string str = "";
 	if (cfile.is_open()) {
 		cout << "\nThe file is open.";
 	}
 	else {
 		cerr << "\nThe file is not found. ";
-		return 2;
 	}
 	cout << "\nВведите имя (для завершения ввода введите end) и дату рождения в формате ГГГГ/ММ/ДД.\n";
 	do {
@@ -62,20 +59,22 @@ int main()
 			break;
 		}
 		getline(cin, friends[countFr].day);
-		birthdays.push_back(friends[countFr]);
 		countFr++;
 	} while (str != "end");
-	for (int i = 0; i < birthdays.size(); i++) {
-		cfile << birthdays[i].name <<" :"<< "     " << birthdays[i].day << " ;\n";
+	for (int i = 0; i < countFr; i++) {
+		cfile << friends[i].name << " :" << "     " << friends[i].day << " ;\n";
 	}
-	cfile.close();
+	return countFr;
+}
+
+void WriteArray(vector<string> fr){
 	ifstream dfile("C:\\Users\\Александр\\Documents\\text for program\\friendsBirthday.txt", ios::app);
+	string str = "";
 	if (dfile.is_open()) {
 		cout << "\nThe file is open.";
 	}
 	else {
 		cerr << "\nThe file is not found. ";
-		return 3;
 	}
 	str = "";
 	while (!dfile.eof()) {
@@ -89,8 +88,7 @@ int main()
 		if (i > 0) {
 				i--;
 			}
-		while (str != ":") {
-			
+		while (str != ":") {			
 			str = "";
 			str=fr[i];
          if (str == ":") {
@@ -127,11 +125,22 @@ int main()
 		if (str == ";") {
 			j++;
 		}
-		birthdays.push_back(friends[j]);
 		if (i >= fr.size()) {
 			break;
 		}		
 	}
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	vector<string> fr;
+	int countFr = 0, nextM = 12, nextD = 0, next = 32, count=0;
+	string str = "", str1 = "", str2 = "", str3 = "", strY = "", strM = "", strD = "", birthdayBoy = "", nextBirthday = "";
+	fstream file("C:\\Users\\Александр\\Documents\\text for program\\friendsBirthday.txt");
+	countFr = fileSize(count);
+	countFr+=writeFile(0, friends);
+	WriteArray(fr);
 	time_t d = time(nullptr);
 	tm* loc = localtime(&d);
 	str1 = to_string(loc->tm_year + 1900);
@@ -171,7 +180,7 @@ int main()
 	if (count > 1) {
 		cout << " и ещё у " << count - 1;
 	}
-	dfile.close();
+	file.close();
 	return 0;
 }
 
