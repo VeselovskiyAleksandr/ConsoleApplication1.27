@@ -27,13 +27,17 @@ int main()
 	cout << "\nДля начала отслеживания задачи введите: begin ";
 	cin>> commandStr;
 	do {
+		cout << "\n " << count;
 		if (count >= 20) {
 			cout << "\n<Большее количество задач програма отслеживать не может.";
 			cout << "\nДля просмотра состояния введите status ";
 			cin >> commandStr;
-			if (commandStr != "status") {
-				return 0;
+			if (commandStr == "status") {
+					for (int i = 0; i < testAll.size(); i++) {
+						cout << "\n" << testAll[i].title << "  " << testAll[i].elapsTime;
 			}
+		};
+				return 0;
 		}
 			cout << "\nВведите название задачи.";
 			cin >> test[count].title;
