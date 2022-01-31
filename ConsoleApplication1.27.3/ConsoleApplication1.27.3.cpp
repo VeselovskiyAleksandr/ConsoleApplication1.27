@@ -26,8 +26,7 @@ int main()
 	do {
 		time_t  start = time(nullptr);
 		interval =(int) difftime(completion, start);
-		if (intermediate != interval) {
-			cout << "\n";
+		if (intermediate != interval) {	
 			if ((int)interval / 60 > 9) {
 				cout << interval / 60 << ":";
 			}
@@ -40,6 +39,7 @@ int main()
 			else {
 				cout << "0" << interval % 60;
 			}
+            cout << "\n";
 		}
 		if (completion == start) {
 			Beep(750, 2250);
